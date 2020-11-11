@@ -46,7 +46,8 @@ public class OrderRestControllerTest {
 		when(iOrderService.addOrder(od)).thenReturn(od);
 
 		mockMvc.perform(post("/order/add").accept(MediaType.APPLICATION_JSON)
-				.content(objectMapper.writeValueAsString(od)).contentType(MediaType.APPLICATION_JSON))
+				.content(objectMapper.writeValueAsString(od))
+				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk());
 	}
 
