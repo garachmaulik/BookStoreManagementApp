@@ -1,0 +1,29 @@
+<div class="container">
+  <table class="mt-2 table table-bordered text-center">
+      <thead>
+          <tr>
+              <th>Firstname</th>
+              <th>Lastname</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Contact</th>
+              <th>DOB</th>
+              <th>Role</th>
+              <th>Gender</th>
+          </tr>
+      </thead>
+      <tbody>
+          <!----------------USING *ngFor------------------------>
+          <tr *ngFor="let register of userList">
+              <td>{{register.firstName}}</td>
+              <td>{{register.lastName}}</td>
+              <td>{{register.userName}}</td>
+              <td>{{register.email}}</td>
+              <td>{{register.contact}}</td>
+              <td>{{register.dob}}</td>
+              <td>{{register.role}}</td>
+              <td>{{register.gender}}</td>
+          </tr>
+      </tbody>
+  </table>
+</div>
