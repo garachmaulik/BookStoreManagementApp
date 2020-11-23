@@ -1,0 +1,18 @@
+<form (ngSubmit)="searchByArtist()">
+  <table class="table table-dark">
+    <tr>
+      <td><label>Enter Artist Name</label></td>
+      <td><input type="text" [(ngModel)]=artist name="artist" 
+        placeholder="Artist Name" class="form-control"></td>
+      <td>
+        <button type="submit" class="btn btn-primary">Search Albums</button>
+      </td>
+    </tr>
+  </table>
+</form>
+<table class="table table-dark" [hidden]="!submitted">
+    <tr><td>Album Id: </td><td>{{album.id}}</td></tr>
+    <tr><td>Album Title: </td><td>{{album.title}}</td></tr>
+    <tr><td>Album Artist: </td><td>{{album.artist}}</td></tr>
+    <tr><td>Album Price: </td><td>{{album.price}}</td></tr>
+</table>

@@ -23,6 +23,19 @@ export class ListComponent implements OnInit {
     if (ans) {
       this.albumService.deleteAlbum(index);
     }
-  }  
+  }
+  
+  edit(index : number) {
+    this.albumService.update(index);
+  }
+  
+  sortByTitle() {
+    this.albumService.sortByTitle();
+  }
+
+  sortByPrice() {
+    this.albumService.sortByPrice();
+  }
+
 }
 

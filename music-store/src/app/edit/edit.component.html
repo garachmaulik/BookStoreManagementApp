@@ -1,0 +1,35 @@
+<form (ngSubmit)="updateAlbum()" class="was-validated">
+  <table class="table table-dark">
+    <tr><th colspan="2">Edit Album</th></tr>
+    <tr><td>Album ID</td>
+      <td><input [(ngModel)]="album.id" name="id" required #id='ngModel'
+            placeholder="Enter Album ID" pattern="[0-9]{4,}" class="form-control">
+          <span *ngIf="id.dirty && id.invalid" class="invalid-feedback">
+            Album ID is invalid
+          </span></td>
+      </tr>
+    <tr><td>Title</td>
+      <td><input [(ngModel)]="album.title" name="title" required #title='ngModel'
+              placeholder="Enter Album Title" pattern="[A-Za-z]{5,}" class="form-control">
+              <span *ngIf="title.dirty && title.invalid" class="invalid-feedback">
+                Album Title is invalid
+              </span></td>
+            </tr>
+    <tr><td>Artist</td>
+        <td><input [(ngModel)]="album.artist" name="artist" #artist='ngModel' required
+              pattern="[a-zA-Z]{5,}" placeholder="Enter Artist Name" class="form-control">
+              <span *ngIf="artist.dirty && artist.invalid" class="invalid-feedback">
+                Artist Name is invalid
+              </span></td></tr>
+    <tr><td>Price</td>
+        <td><input [(ngModel)]="album.price" name="price" required #price='ngModel'
+              pattern="[0-9]{3}" placeholder="Enter Price" class="form-control">
+              <span *ngIf="price.dirty && price.invalid" class="invalid-feedback">
+                Price is invalid
+              </span></td>
+            </tr>
+    <tr><th colspan="2">
+        <button type="submit" class="btn btn-success">Update Album</button>
+    </th></tr>
+  </table>  
+</form>

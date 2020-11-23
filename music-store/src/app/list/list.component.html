@@ -17,7 +17,8 @@
               <td>{{album.title}}</td>
               <td>{{album.artist}}</td>
               <td>{{album.price}}</td>
-              <td><button class="btn btn-warning" (click)="delete(i)">Delete</button></td>
+              <td><button class="btn btn-info" (click)="edit(i)">Edit</button> |
+                  <button class="btn btn-warning" (click)="delete(i)">Delete</button></td>
           </tr>
       </tbody>
   </table>
