@@ -5,7 +5,6 @@ import { AlbumModel } from '../album.model';
   providedIn: 'root'
 })
 export class AlbumService {
-
   albumList : AlbumModel[] = [];
 
   constructor() { }
