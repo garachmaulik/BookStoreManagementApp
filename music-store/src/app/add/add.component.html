@@ -2,13 +2,13 @@
 <form class="mt-2" (ngSubmit)="saveAlbum()" #addForm="ngForm">
   <table class="table table-bordered table-hover text-center mx-auto w-50">
     <tr><th class="bg-white text-dark" colspan="2">Add Album</th></tr>
-    <tr><td>Album ID</td>
+   <!-- <tr><td>Album ID</td>
       <td><input [(ngModel)]="album.id" name="id" required #id="ngModel" class="form-control"
             placeholder="Enter Album ID" pattern="[0-9]{4,}"/>
           <div *ngIf="id.invalid && id.dirty" class="alert-danger">
             Album ID is required
-          </div></td>
-      </tr>
+          </div></td> 
+      </tr>-->
     <tr><td>Title</td>
       <td><input [(ngModel)]="album.title" name="title" required #title="ngModel"
               placeholder="Enter Album Title" pattern="[A-Za-z ]{5,}" class="form-control">

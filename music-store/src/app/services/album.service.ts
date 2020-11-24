@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlbumModel } from '../album.model';
@@ -8,14 +9,14 @@ import { AlbumModel } from '../album.model';
 export class AlbumService {
   albumList : AlbumModel[] = [];
 
-  constructor(private router : Router) { }
+  constructor(private router : Router, private http : HttpClient) { }
 
   addAlbum(album : AlbumModel){
-    this.albumList.push(album);
+    this.http.post("http://localhost:8080/add", album).subscribe(data => data = album);
   }
 
-  listAlbum() : AlbumModel[]{
-    return this.albumList;
+  listAlbum(){
+    return this.http.get<AlbumModel[]>("http://localhost:8080/get");
   }
 
   deleteAlbum(index : number) : AlbumModel[] {

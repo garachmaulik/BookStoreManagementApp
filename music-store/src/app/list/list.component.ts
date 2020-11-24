@@ -15,7 +15,7 @@ export class ListComponent implements OnInit {
   constructor(private albumService : AlbumService) { }
 
   ngOnInit() {
-    this.albumList = this.albumService.listAlbum();
+    this.albumService.listAlbum().subscribe(data => this.albumList = data);
   }
 
   delete(index: number) {

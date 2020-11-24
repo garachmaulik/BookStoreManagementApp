@@ -1,17 +1,17 @@
-<form (ngSubmit)="updateAlbum()" class="was-validated">
+<form (ngSubmit)="updateAlbum()"  class="was-validated">
   <table class="table table-dark">
     <tr><th colspan="2">Edit Album</th></tr>
-    <tr><td>Album ID</td>
+    <!--<tr><td>Album ID</td>
       <td><input [(ngModel)]="album.id" name="id" required #id='ngModel'
             placeholder="Enter Album ID" pattern="[0-9]{4,}" class="form-control">
           <span *ngIf="id.dirty && id.invalid" class="invalid-feedback">
             Album ID is invalid
           </span></td>
-      </tr>
+      </tr> -->
     <tr><td>Title</td>
       <td><input [(ngModel)]="album.title" name="title" required #title='ngModel'
               placeholder="Enter Album Title" pattern="[A-Za-z]{5,}" class="form-control">
-              <span *ngIf="title.dirty && title.invalid" class="invalid-feedback">
+              <span *ngIf="title.dirty && title.valid" class="valid-feedback bg-white">
                 Album Title is invalid
               </span></td>
             </tr>
