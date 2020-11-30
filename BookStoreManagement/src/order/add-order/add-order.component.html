@@ -1,0 +1,54 @@
+<app-navhome></app-navhome>
+<div class="container">
+  <form (ngSubmit)="addOrder()" class="mt-2" #orderForm="ngForm">
+    <table class="table table-hover table-light table-active mx-auto table-striped font-weight-bold" style="width:60%">
+      <tr class="table-info"><th colspan="4" class="text-center"><h1>Order Details</h1></th></tr>
+      <tr>
+        <td class="text-center"><label for="formBook">Book:</label></td>
+        <td><select class="form-control" name="booklist" id="formBook" [(ngModel)]="orderDetails.book.bookId" (change)="setPrice(orderDetails.book.bookId)">
+          <option value="" disabled selected hidden>Select</option>
+          <option *ngFor="let b of bookList" [value]="b.bookId">{{b.title}}</option>
+        </select></td>
+        <td class="text-center"><label for="bookprice">Price:</label></td>
+        <td class="text-center"><input class="form-control bg-white" [formControl]="bookPrice" readOnly id="bookprice">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" class="text-center" ><label for="rname">Recipient Name:</label></td>
+        <td colspan="2"><input [(ngModel)]="orderDetails.bookOrder.recipientName" id="rname" name="recipientname" required #recname="ngModel"
+          placeholder="Enter Recipient Name" pattern="[A-Za-z ]{4,}" class="form-control">
+          <div *ngIf="recname.invalid && recname.dirty" class="alert-warning">
+            Recipient Name is required
+          </div></td>
+      </tr>
+      <tr>
+        <td colspan="2" class="text-center" ><label for="rph">Recipient Phone:</label></td>
+        <td colspan="2"><input [(ngModel)]="orderDetails.bookOrder.recipientPhone" id="rph" name="recipientphone" required #recphone="ngModel"
+          placeholder="Enter Contact Number" pattern="[6-9][0-9]{9}" class="form-control">
+          <div *ngIf="recphone.invalid && recphone.dirty" class="alert-warning">
+            Contact should be a 10 digit
+          </div></td>
+      </tr>
+      <tr>
+        <td colspan="2" class="text-center" ><label for="pay">Payment Method:</label></td>
+        <td colspan="2"><select class="form-control" name="payment" id="pay" 
+          [(ngModel)]="orderDetails.bookOrder.paymentMethod">
+          <option value="" disabled selected hidden>Select</option>
+          <option *ngFor="let p of paymentMethod" [value]="p">{{p}}</option>
+        </select></td>
+      </tr>
+     <tr>
+       <td><label for="quantity">Quantity:</label></td>
+       <td><input type="number" min="1" name="quant" id="quantity" (input)="setSubTotal(orderDetails.quantity)" [(ngModel)]="orderDetails.quantity" required pattern="[1-9][0-9]{0,2}"
+        #q="ngModel" placeholder="Enter Quantity" class="form-control"></td>
+        <td><label for="subT">SubTotal:</label></td>
+       <td><input type="text" name="total" id="subT" [formControl]="subTotal" readonly
+         class="form-control bg-white" ></td>
+     </tr>
+      <tr class="text-center">
+        <td colspan="2"><button type="reset" class="btn btn-warning">Reset</button></td>
+        <td colspan="2"><button type="submit" class="btn btn-primary">Place Order</button></td>
+      </tr>
+    </table>
+  </form>
+  </div>

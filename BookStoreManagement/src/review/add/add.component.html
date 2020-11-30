@@ -1,0 +1,59 @@
+<!-- <head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="BookStoreManagement\src\app\review\add\add.component.css">
+ </head> -->
+<div class="container-fluid">
+  <h1>BookStore Management</h1>
+  <form (ngSubmit)="saveReview()" #addForm="ngForm" class="was-validated">
+    <table class="table table-dark">
+      <tr>
+        <th colspan="2">Add Review</th>
+      </tr>
+
+      <tr>
+        <td>Headline</td>
+        <td><input [(ngModel)]="review.headLine" name="headLine" required #headline='ngModel' pattern="[A-Za-z]{0,20}"
+            placeholder="Enter Headline" class="form-control">
+          <span *ngIf="headline.dirty && headline.invalid" class="invalid-feedback">
+            Headline is invalid
+          </span></td>
+      </tr>
+
+      <tr>
+        <td>Comment</td>
+        <td><input [(ngModel)]="review.comment" name="comment" required #comment='ngModel' pattern="[A-Za-z]{0,100}"
+            placeholder="Enter Comment" class="form-control">
+          <span *ngIf="comment.dirty && comment.invalid" class="invalid-feedback">
+            Comment is invalid
+          </span></td>
+      </tr>
+
+      <tr>
+        <td>Rating</td>
+        <td>
+          <div class="rating">
+            <input id="star5" name="star" type="radio" value="5" class="radio-btn hide" />
+            <label for="star5">☆</label>
+            <input id="star4" name="star" type="radio" value="4" class="radio-btn hide" />
+            <label for="star4">☆</label>
+            <input id="star3" name="star" type="radio" value="3" class="radio-btn hide" />
+            <label for="star3">☆</label>
+            <input id="star2" name="star" type="radio" value="2" class="radio-btn hide" />
+            <label for="star2">☆</label>
+            <input id="star1" name="star" type="radio" value="1" class="radio-btn hide" />
+            <label for="star1">☆</label>
+            <div class="clear"></div>
+          </div>
+        </td>
+      </tr>
+
+
+
+      <tr>
+        <th colspan="2">
+          <button type="submit" class="btn btn-success" [disabled]="!addForm.valid">Save Review</button>
+        </th>
+      </tr>
+    </table>
+  </form>
+</div>

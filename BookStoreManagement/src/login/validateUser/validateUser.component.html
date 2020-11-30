@@ -1,0 +1,16 @@
+<form (ngSubmit)='loggedIn()' #logForm="ngForm"> 
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input type="email" class="form-control" placeholder="Enter Email" name="emailId"
+          [(ngModel)]=user.email pattern ="[0-9]{4,}" required #userId="ngModel">
+          <div class="alert alert-danger" *ngIf="emailId.dirty && emailId.invalid">Invalid email</div>
+  </div>
+  <div class="form-group">
+    <label for="pwd">Password:</label>
+    <input type="password" class="form-control" placeholder="Enter password" name="password"
+          [(ngModel)]=user.password pattern ="[A-Za-z0-9]{8,}"  required #pwd="ngModel">
+           <div class="alert-danger" *ngIf="pwd.dirty && pwd.invalid">Invalid Password</div>
+  </div>
+  <button type="submit" class="btn btn-primary"[disabled]="!logForm.valid">Login</button>
+  <a class="nav-link" [routerLink]="['../register']" >Create Account</a>
+</form>
