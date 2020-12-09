@@ -119,8 +119,7 @@ public class OrderRestControllerTest {
 
 	@Test
 	public void testListOrderByCustomerValid() throws Exception {
-		Customer cs = new Customer();
-		cs.setCustomerId(103);
+		int cs = 103;
 		List<OrderDetails> odList = iOrderService.listOrderByCustomer(cs);
 		when(iOrderService.listOrderByCustomer(cs)).thenReturn(odList);
 
@@ -131,8 +130,7 @@ public class OrderRestControllerTest {
 
 	@Test
 	public void testListOrderByCustomerInValid() throws Exception {
-		Customer cs = new Customer();
-		cs.setCustomerId(103);
+		int cs = 103;
 		when(iOrderService.listOrderByCustomer(cs)).thenThrow(NotFoundException.class);
 
 		mockMvc.perform(get("/order/listOrderByCustomer").accept(MediaType.APPLICATION_JSON)

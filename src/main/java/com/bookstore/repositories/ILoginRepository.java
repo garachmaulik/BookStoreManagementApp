@@ -9,9 +9,5 @@ import com.bookstore.entities.User;
 
 @Repository
 public interface ILoginRepository extends JpaRepository<User, Integer> {
-
-	
-	@Query("FROM User WHERE User_Id=:id AND Password=:pass")
-	User validate(@Param("id")int id,@Param("pass") String pass);
-	
+	User findByEmailAndPassword(String email, String pass);
 }	

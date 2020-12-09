@@ -5,12 +5,9 @@ import com.bookstore.exception.UserNotFoundException;
 
 public interface ILoginService {
 
-User add(User user) throws UserNotFoundException;
+	User add(User user) throws UserNotFoundException;
 	
-	User delete(User user) throws UserNotFoundException;
+	User delete(int userId) throws UserNotFoundException;
 	
-	User validate(int id, String pass) throws UserNotFoundException;
-
-	
-	
+	User validate(String email, String pass) throws UserNotFoundException;	
 }

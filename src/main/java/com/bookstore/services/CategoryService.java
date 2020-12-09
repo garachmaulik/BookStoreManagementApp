@@ -29,7 +29,7 @@ public class CategoryService implements ICategoryService{
 
 	@Override
 	public Category editCategory(Category cat) throws NotFoundException {
-		if(iCategoryRepository.existsById(cat.getCategoryId())/*cat == null || cat.getCategoryName().isEmpty() || cat.getCategoryName() == null*/) {
+		if(!iCategoryRepository.existsById(cat.getCategoryId())/*cat == null || cat.getCategoryName().isEmpty() || cat.getCategoryName() == null*/) {
 			throw new NotFoundException("Catgeory is null");
 		}
 		else {

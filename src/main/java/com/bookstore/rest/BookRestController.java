@@ -3,17 +3,20 @@ package com.bookstore.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.bookstore.entities.Book;
 import com.bookstore.exception.BookNotFoundException;
 import com.bookstore.services.IBookService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/book")
 public class BookRestController {
@@ -28,7 +31,7 @@ public class BookRestController {
 	}
 	
 	// URL: http://localhost:8880/list
-	@GetMapping(value = "/list", consumes = "application/json")
+	@GetMapping(value = "/list", produces = "application/json")
 	public List<Book> listAllBooks() throws BookNotFoundException{
 		return service.listAllBooks();
 	}
@@ -52,13 +55,13 @@ public class BookRestController {
 	}
 	
 	// URL: http://localhost:8880/title
-	@GetMapping(value = "/title/{titl}", consumes = "application/json")
+	@GetMapping(value = "/title/{title}", produces = "application/json")
 	public Book findBookByTitle(@PathVariable String title) throws BookNotFoundException {
 		return service.findByTitle(title);
 	}
 	
 	// URL: http://localhost:8880/title
-	@GetMapping(value = "/keyword/{key}")
+	@GetMapping(value = "/keyword/{keyword}")
 	public List<Book> search(@PathVariable String keyword) throws BookNotFoundException {
 		return service.search(keyword);
 	}

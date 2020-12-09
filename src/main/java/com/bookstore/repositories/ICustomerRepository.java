@@ -15,5 +15,7 @@ public interface ICustomerRepository extends JpaRepository<Customer, Integer>{
 		
 	@Query("FROM Customer WHERE customerId=:id")
 	List<Customer> findByCustomer_Id(@Param("id")Integer Customer_Id)  throws CustomerNotFoundException;
+	
+	Customer findByEmailAndPassword(String email, String pass);
 		
 }

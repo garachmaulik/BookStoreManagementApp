@@ -6,8 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
-//@SequenceGenerator(name = "catId", sequenceName = "catSeq", allocationSize = 1, initialValue = 1001)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Category {
 
 	public Category() {

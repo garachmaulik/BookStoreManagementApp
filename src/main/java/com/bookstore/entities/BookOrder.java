@@ -12,7 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "BOOKORDER")
 public class BookOrder {
 	
@@ -38,7 +41,7 @@ public class BookOrder {
 	@Column(name = "Order_Id")
 	private int orderId;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "CUSTOMER_ID")
 	private Customer customer;
 
@@ -55,7 +58,7 @@ public class BookOrder {
 	@JoinColumn(name = "ADDRESS_ID")
 	private Address ShippingAddress;
 	
-	@Column(name = "Payment_Method", length = 15)
+	@Column(name = "Payment_Method", length = 20)
 	private String paymentMethod;
 	
 	@Column(name = "Recipient_Name", length = 20)

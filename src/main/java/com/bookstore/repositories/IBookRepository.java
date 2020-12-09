@@ -13,8 +13,7 @@ public interface IBookRepository extends JpaRepository<Book, Integer>{
 	@Query("FROM Book WHERE title=:titl")
 	Book findByTitle(@Param("titl") String title);
 	
-	@Query("FROM Book WHERE keyword=:key")
-	List<Book> search(@Param("key") String keyword);
+	List<Book> findByDescriptionContains(String keyword);
 	
 	@Query("FROM Book WHERE category=:cat")
 	List<Book> listBooksByCategory(@Param("cat") String category);

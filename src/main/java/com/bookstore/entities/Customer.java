@@ -11,7 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Customer {
 
 	public Customer() {
@@ -19,14 +22,13 @@ public class Customer {
 	}
 
 	public Customer(String email, String fullName, String password, Address address,
-			String mobileNumber, String role, LocalDate registerOn) {
+			String mobileNumber, LocalDate registerOn) {
 		super();
 		this.email = email;
 		this.fullName = fullName;
 		this.password = password;
 		this.address = address;
 		this.mobileNumber = mobileNumber;
-		this.role = role;
 		this.registerOn = registerOn;
 	}
 
@@ -44,15 +46,12 @@ public class Customer {
 	@Column(name = "Password", length = 16)
 	private String password;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "ADDRESS_ID")
 	private Address address;
 
 	@Column(name = "Mobile_Number", length = 15)
 	private String mobileNumber;
-
-	@Column(name = "Role", length = 10)
-	private String role;
 	
 	@Column(name = "Register_On")
 	private LocalDate registerOn;
@@ -113,14 +112,6 @@ public class Customer {
 		this.registerOn = registerOn;
 	}
 
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -132,7 +123,6 @@ public class Customer {
 		result = prime * result + ((mobileNumber == null) ? 0 : mobileNumber.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((registerOn == null) ? 0 : registerOn.hashCode());
-		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		return result;
 	}
 
@@ -176,11 +166,6 @@ public class Customer {
 			if (other.registerOn != null)
 				return false;
 		} else if (!registerOn.equals(other.registerOn))
-			return false;
-		if (role == null) {
-			if (other.role != null)
-				return false;
-		} else if (!role.equals(other.role))
 			return false;
 		return true;
 	}

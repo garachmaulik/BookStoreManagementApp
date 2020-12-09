@@ -1,8 +1,9 @@
 package com.bookstore.rest;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import com.bookstore.entities.Review;
 import com.bookstore.exception.ReviewNotFoundException;
 import com.bookstore.services.IReviewService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/review")
 public class ReviewRestController {
@@ -25,11 +27,14 @@ public class ReviewRestController {
 	private IReviewService IReviewService;
 
 	// URL= http://localhost:8880/add
-	@PostMapping(value = "/add", consumes = "application/json")
-	@ExceptionHandler(ReviewNotFoundException.class)
-	public Review addReview(@RequestBody Review review) throws ReviewNotFoundException {
-		return IReviewService.addReview(review);
-	}
+	@PostMapping(value = "/add", consumes = "application/json") //response entity
+    @ExceptionHandler(ReviewNotFoundException.class)
+    public Review addReview( @RequestBody Review review,  BindingResult result) throws ReviewNotFoundException {
+        if(result.hasErrors()) {
+            throw new ReviewNotFoundException(result.getFieldError().getDefaultMessage());
+        }
+        return IReviewService.addReview(review);
+    }
 
 	// URL= http://localhost:8880/view
 	@PostMapping(value = "/view", consumes = "application/json")

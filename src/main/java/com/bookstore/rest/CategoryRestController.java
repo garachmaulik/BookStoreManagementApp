@@ -2,7 +2,9 @@ package com.bookstore.rest;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +18,7 @@ import com.bookstore.exception.InternalServerException;
 import com.bookstore.exception.NotFoundException;
 import com.bookstore.services.ICategoryService;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/category")
 public class CategoryRestController {
@@ -42,7 +45,7 @@ public class CategoryRestController {
 	}
 	
 	// URL: http://localhost:8080/category/deleteCategory
-	@DeleteMapping(value = "/deleteCategory", consumes = "application/json")
+	@PostMapping(value = "/deleteCategory", consumes = "application/json")
 	public Category deleteCategory(@RequestBody Category category) throws InternalServerException {
 		return iCategoryService.removeCategory(category);
 	}

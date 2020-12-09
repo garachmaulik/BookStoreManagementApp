@@ -7,12 +7,16 @@ import com.bookstore.exception.CustomerNotFoundException;
 
 public interface ICustomerService {
 			
-	Customer add(Customer customer) throws CustomerNotFoundException;
+	Customer createCustomer(Customer customer) throws CustomerNotFoundException;
 	
-	Customer get(int id) throws CustomerNotFoundException;
+	List<Customer> listCustomers() throws CustomerNotFoundException;
 	
-	List<Customer> list() throws CustomerNotFoundException;
+	Customer updateCustomer(Customer customer) throws CustomerNotFoundException;
 	
-	List<Customer> customersById(Integer Id) throws CustomerNotFoundException;
+	Customer deleteCustomer(int custId) throws CustomerNotFoundException;
+	
+	Customer viewCustomer(int custId) throws CustomerNotFoundException;
+	
+	Customer findCustomer(String email, String pass);
 	
 }

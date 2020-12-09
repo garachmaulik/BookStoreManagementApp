@@ -41,8 +41,8 @@ public class CustomerRestControllerTest {
 	public void testCreateCustomerValid() throws Exception
 	{
 		Address add=new Address("Model town","delhi","India","171234");
-		Customer customer= new Customer("abc@gmail.com","Manoj Kumar","abc@123",add,"Role","9876543210", LocalDate.now());
-		Mockito.when(service.add(customer)).thenReturn(customer);
+		Customer customer= new Customer("abc@gmail.com","Manoj Kumar","abc@123",add,"9876543210", LocalDate.now());
+		Mockito.when(service.createCustomer(customer)).thenReturn(customer);
 		
 		mvc.perform(post("/add").accept(MediaType.APPLICATION_JSON).content(object.writeValueAsString(customer))
 				.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
@@ -50,8 +50,8 @@ public class CustomerRestControllerTest {
 	@Test
 	public void testCreateCustomerInvalid() throws Exception{
 		Address add=new Address("123, Model town","delhi","India","171234");
-		Customer customer= new Customer("abc@gmail.com","Manoj Kumar","abc@123",add,"Role","9876543210", LocalDate.now());	
-		when(service.add(customer)).thenThrow(CustomerNotFoundException.class);
+		Customer customer= new Customer("abc@gmail.com","Manoj Kumar","abc@123",add,"9876543210", LocalDate.now());	
+		when(service.createCustomer(customer)).thenThrow(CustomerNotFoundException.class);
 		
 		mvc.perform(post("/Customer/addCustomer").accept(MediaType.APPLICATION_JSON)
 				.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound());
@@ -59,14 +59,14 @@ public class CustomerRestControllerTest {
 	@Test
 	public void testFindBycustomerIdValid() throws Exception {
 		Address add=new Address("123, Model town","delhi","India","171234");
-		Customer customer= new Customer("abc@gmail.com","Manoj Kumar","abc@123",add,"Role","9876543210", LocalDate.now());	
-		when(service.get(11)).thenReturn(customer);
+		Customer customer= new Customer("abc@gmail.com","Manoj Kumar","abc@123",add,"9876543210", LocalDate.now());	
+		when(service.viewCustomer(11)).thenReturn(customer);
 		mvc.perform(get("/get").accept(MediaType.APPLICATION_JSON).content("11")
 				.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 	}
 	@Test
 	public void testFindBycustomerIdInvalid() throws Exception {
-		when(service.get(15)).thenThrow(CustomerNotFoundException.class);
+		when(service.viewCustomer(15)).thenThrow(CustomerNotFoundException.class);
 		mvc.perform(get("/Customer/get").accept(MediaType.APPLICATION_JSON)
 				.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound());
 	}
@@ -76,7 +76,7 @@ public class CustomerRestControllerTest {
 	}
 	@Test
 	public void testListAllCustomersInvalid() throws Exception {
-		when(service.list()).thenThrow(CustomerNotFoundException.class);
+		when(service.listCustomers()).thenThrow(CustomerNotFoundException.class);
 		mvc.perform(get("/list").accept(MediaType.APPLICATION_JSON)
 				.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound());
 	}
@@ -86,7 +86,7 @@ public class CustomerRestControllerTest {
 	}
 	@Test
 	public void testFindBycustomersByIdInvalid() throws Exception {
-		when(service.customersById(10)).thenThrow(CustomerNotFoundException.class);
+		when(service.viewCustomer(10)).thenThrow(CustomerNotFoundException.class);
 		mvc.perform(get("/Customer/Id").accept(MediaType.APPLICATION_JSON)
 				.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound());
 	}

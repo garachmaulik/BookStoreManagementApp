@@ -3,12 +3,14 @@ package com.bookstore.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bookstore.entities.Book;
@@ -18,6 +20,7 @@ import com.bookstore.exception.InternalServerException;
 import com.bookstore.exception.NotFoundException;
 import com.bookstore.services.IOrderService;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/order")
 public class OrderRestController {
@@ -50,9 +53,9 @@ public class OrderRestController {
 	}
 	
 	// URL: http://localhost:8080/order/listOrderByCustomer
-	@GetMapping(value = "/listOrderByCustomer", consumes = "application/json")
-	public List<OrderDetails> listByCustomer(@RequestBody Customer cs) throws NotFoundException{
-		return iOrderService.listOrderByCustomer(cs);
+	@GetMapping(value = "/listOrderByCustomer", produces = "application/json")
+	public List<OrderDetails> listByCustomer(@RequestParam("id") int custId) throws NotFoundException{
+		return iOrderService.listOrderByCustomer(custId);
 	}
 	
 	// URL: http://localhost:8080/order/viewOrderByBook

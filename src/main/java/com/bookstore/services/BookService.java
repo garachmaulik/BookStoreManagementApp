@@ -9,11 +9,15 @@ import org.springframework.stereotype.Service;
 import com.bookstore.entities.Book;
 import com.bookstore.exception.BookNotFoundException;
 import com.bookstore.repositories.IBookRepository;
+import com.bookstore.repositories.ICategoryRepository;
 @Service
 public class BookService implements IBookService {
 
 	@Autowired
 	private IBookRepository ibookRepository;
+	
+	@Autowired
+	private ICategoryRepository iCategoryRepository; 
 	
 	@Override
 	public Book createBook(Book b) throws BookNotFoundException {
@@ -21,6 +25,7 @@ public class BookService implements IBookService {
 		{
 			throw new BookNotFoundException("Book is null");
 		}		
+		b.setCategory(iCategoryRepository.getOne(b.getCategory().getCategoryId()));
 		return ibookRepository.saveAndFlush(b);
 	}
 
@@ -57,7 +62,7 @@ public class BookService implements IBookService {
 			throw new BookNotFoundException("Book not found");
 		}
 		else {
-		return b;
+		return ibookRepository.getOne(b.getBookId());
 		}
 	}
 
@@ -75,7 +80,7 @@ public class BookService implements IBookService {
 	@Override
 	public List<Book> search(String keyword) throws BookNotFoundException {
 		List<Book> books= new ArrayList<Book>();
-		books=ibookRepository.search(keyword);
+		books=ibookRepository.findByDescriptionContains(keyword);
 		if(books.isEmpty())
 		{
 			throw new BookNotFoundException("Book not found");
@@ -110,6 +115,4 @@ public class BookService implements IBookService {
 			}
 			return books;
 		  }
-	 
-
 }

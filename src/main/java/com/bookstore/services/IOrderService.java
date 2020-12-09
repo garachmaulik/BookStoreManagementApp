@@ -16,7 +16,7 @@ public interface IOrderService {
 
 	public List<OrderDetails> listAllOrders() throws NotFoundException;
 
-	public List<OrderDetails> listOrderByCustomer(Customer cs) throws NotFoundException; // Dont change
+	public List<OrderDetails> listOrderByCustomer(int custId) throws NotFoundException; // Dont change
 
 	public OrderDetails updateOrder(OrderDetails od) throws NotFoundException, InternalServerException;
 

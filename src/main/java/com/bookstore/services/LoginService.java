@@ -24,18 +24,19 @@ public class LoginService implements ILoginService {
 	}
 
 	@Override
-	public User delete(User user) throws UserNotFoundException {
-		if(!iLoginRepository.existsById(user.getUserId()))
+	public User delete(int userId) throws UserNotFoundException {
+		if(!iLoginRepository.existsById(userId))
 		{
 			throw new UserNotFoundException("User is null");
 		}
-		iLoginRepository.delete(user);
+		User user = iLoginRepository.getOne(userId);
+		iLoginRepository.deleteById(userId);
 		return user;
 	}
 
 	@Override
-	public User validate(int id,String pass) throws UserNotFoundException {
-		User user= iLoginRepository.validate( id , pass);
+	public User validate(String email,String pass) throws UserNotFoundException {
+		User user= iLoginRepository.findByEmailAndPassword(email, pass);
 		return user;
 	}
 }
