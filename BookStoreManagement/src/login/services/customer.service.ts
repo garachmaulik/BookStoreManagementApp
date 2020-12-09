@@ -22,8 +22,8 @@ export class CustomerService {
     return this.http.get<Customer[]>(this.baseUrl + "/customer/getlist");
   }
 
-  deleteCustomerbyId(id) {
-    return this.http.get<Customer>(this.baseUrl + "/customer/deleteCustomer/" + id);
+  deleteCustomerbyId(id : number) {
+    return this.http.get<Customer>(this.baseUrl + "/customer/deleteCustomer?id=" + id);
 
   }
 
@@ -39,5 +39,9 @@ export class CustomerService {
 
   getByIndex(index: number) {
     return this.customerList[index];
+  }
+
+  findCust(email : string, pass : string){
+    return this.http.get<Customer>(`${this.baseUrl}/customer/findCustomer?email=${email}&pass=${pass}`);
   }
 }

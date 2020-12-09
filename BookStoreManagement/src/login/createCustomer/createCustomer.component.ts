@@ -13,22 +13,21 @@ import { UserService } from '../services/user.service';
 })
 export class CreateComponent implements OnInit {
   customer : Customer;
-  address : Address;
-  user : User;
 
   constructor(private router: Router, private service : CustomerService, private uService : UserService) { 
-    this.address = new Address();
     this.customer = new Customer();
-    this.user=new User();
-    this.user.role="Customer";
   }
 
   ngOnInit() {
   }
   
   saveCustomer() {
+    this.initiate();
     this.service.createCustomer(this.customer);
-    this.uService.addUser(this.user);
     this.router.navigate(['login']);
+  }
+  
+  initiate(){
+    this.customer.registerOn = new Date();
   }
 }

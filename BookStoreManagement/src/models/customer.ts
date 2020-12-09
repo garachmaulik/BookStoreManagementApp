@@ -7,6 +7,5 @@ export class Customer {
     password : string;
     address : Address = new Address();
     mobileNumber : string;
-    role : string;
     registerOn : Date;
 }

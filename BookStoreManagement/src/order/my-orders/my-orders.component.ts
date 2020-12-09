@@ -12,7 +12,7 @@ import { OrderService } from '../service/order.service';
 export class MyOrdersComponent implements OnInit {
 
   myOrdersList : OrderDetails[] = [];
-  private custId : number =  97 //sessionStorage.userId;  
+  private custId : number = sessionStorage.userId;  
 
   constructor(private router : Router, private orderService : OrderService) { 
    }

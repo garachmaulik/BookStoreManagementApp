@@ -16,7 +16,7 @@ export class AddOrderComponent implements OnInit {
   private orderDetails : OrderDetails;
   private paymentMethod : string[] = [];
   private bookPrice = new FormControl('');
-  private custId : number = 97 //sessionStorage.userId;
+  private custId : number = sessionStorage.userId;
   private subTotal = new FormControl('');
   
   constructor(private router : Router,private orderService : OrderService) { 
@@ -26,6 +26,7 @@ export class AddOrderComponent implements OnInit {
 
   ngOnInit() {
     this.orderService.listAllBooks().subscribe(data => this.bookList =  data);
+    console.log(this.custId);
   }
 
    addOrder(){

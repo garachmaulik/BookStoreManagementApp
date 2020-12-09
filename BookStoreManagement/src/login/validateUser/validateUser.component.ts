@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/models/user';
+import { CustomerService } from '../services/customer.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -10,31 +11,30 @@ import { UserService } from '../services/user.service';
 })
 
 export class ValidateComponent implements OnInit {
-  userId : number;
-  user : User;
-  roles : string[];
-  flag : boolean;
-  submitted : boolean;
+  user: User;
+  validUser: User;
 
-  constructor(private service : UserService, private router : Router) { 
+  constructor(private service: UserService, private router: Router, private custService: CustomerService) {
     this.user = new User();
   }
 
   ngOnInit() {
   }
 
-  loggedIn(){
-    this.service.searchByUserId(this.userId).subscribe(data => this.user = data);
-    if(this.user != null){
-      this.submitted = true;
-      this.flag=true;
-      sessionStorage.userId=this.userId;
-      let id =sessionStorage.userId;
-      if(this.user.role == "Admin"){
-        this.router.navigate(['homeadmin']);
+ async login() {
+    await this.service.validate(this.user).then(data=> this.validUser = data);
+    if (this.validUser != null) {
+      if (this.validUser.role == "Admin") {
+        sessionStorage.userId = this.validUser.userId;
+         this.router.navigate(['homeadmin']);
       }
-      this.router.navigate(['home']);
+      else{
+        this.custService.findCust(this.validUser.email, this.validUser.password).subscribe(data=> sessionStorage.userId = data.customerId);
+        this.router.navigate(['home']);
+      }
+    }
+    else{
+      alert("Login failed. Please try again");
     }
   }
-  
 }
